@@ -1,4 +1,4 @@
-FROM gap-base:testv0.4
+FROM gap-base:testv0.5
 
 LABEL maintainer="The GAP Group <support@gap-system.org>"
 
@@ -17,20 +17,20 @@ RUN    mkdir /home/gap/inst/ \
 # download and build GAP packages
 RUN    mkdir /home/gap/inst/gap-${GAP_BRANCH}/pkg \
     && cd /home/gap/inst/gap-${GAP_BRANCH}/pkg \
-    && wget -q https://files.gap-system.org/gap4pkgs/packages-${GAP_BRANCH}.tar.gz \
-    && tar xzf packages-${GAP_BRANCH}.tar.gz \
-    && ../bin/BuildPackages.sh --parallel
+    && wget -q https://files.gap-system.org/gap4pkgs/packages-required-${GAP_BRANCH}.tar.gz \
+    && tar xzf packages-required-${GAP_BRANCH}.tar.gz 
+#    && ../bin/BuildPackages.sh --parallel
 
 # build JupyterKernel
-RUN    cd /home/gap/inst/gap-${GAP_BRANCH}/pkg \
-    && mv JupyterKernel-* JupyterKernel \
-    && cd JupyterKernel \
-    && pip3 install . --user
+#RUN    cd /home/gap/inst/gap-${GAP_BRANCH}/pkg \
+#    && mv JupyterKernel-* JupyterKernel \
+#    && cd JupyterKernel \
+#    && pip3 install . --user
 
-RUN jupyter serverextension enable --py jupyterlab --user
+#RUN jupyter serverextension enable --py jupyterlab --user
 
-ENV PATH /home/gap/inst/gap-${GAP_BRANCH}/pkg/JupyterKernel/bin:${PATH}
-ENV JUPYTER_GAP_EXECUTABLE /home/gap/inst/gap-${GAP_BRANCH}/bin/gap.sh
+#ENV PATH /home/gap/inst/gap-${GAP_BRANCH}/pkg/JupyterKernel/bin:${PATH}
+#ENV JUPYTER_GAP_EXECUTABLE /home/gap/inst/gap-${GAP_BRANCH}/bin/gap.sh
 
 ENV GAP_HOME /home/gap/inst/gap-${GAP_BRANCH}
 ENV PATH ${GAP_HOME}/bin:${PATH}
