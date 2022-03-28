@@ -2,7 +2,7 @@ FROM gap-base:testv0.5
 
 LABEL maintainer="The GAP Group <support@gap-system.org>"
 
-ENV GAP_BRANCH=stable-4.11
+ENV GAP_BRANCH=stable-4.10.1
 
 # download and build GAP
 RUN    mkdir /home/gap/inst/ \

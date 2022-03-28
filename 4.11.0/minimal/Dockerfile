@@ -2,7 +2,7 @@ FROM gap-base:testv0.5
 
 LABEL maintainer="The GAP Group <support@gap-system.org>"
 
-ENV GAP_BRANCH=stable-4.11
+ENV GAP_BRANCH=stable-4.11.0
 
 # download and build GAP
 RUN    mkdir /home/gap/inst/ \
@@ -15,10 +15,10 @@ RUN    mkdir /home/gap/inst/ \
     && cp bin/gap.sh bin/gap
 
 # download and build GAP packages
-RUN    mkdir /home/gap/inst/gap-${GAP_BRANCH}/pkg \
-    && cd /home/gap/inst/gap-${GAP_BRANCH}/pkg \
-    && wget -q https://files.gap-system.org/gap4pkgs/packages-required-${GAP_BRANCH}.tar.gz \
-    && tar xzf packages-required-${GAP_BRANCH}.tar.gz 
+#RUN    mkdir /home/gap/inst/gap-${GAP_BRANCH}/pkg \
+#    && cd /home/gap/inst/gap-${GAP_BRANCH}/pkg \
+#    && wget -q https://files.gap-system.org/gap4pkgs/packages-required-${GAP_BRANCH}.tar.gz \
+#    && tar xzf packages-required-${GAP_BRANCH}.tar.gz 
 #    && ../bin/BuildPackages.sh --parallel
 
 # build JupyterKernel
