@@ -15,41 +15,14 @@ RUN    apt-get update -qq \
             curl \
             g++ \
             gcc \
-#            gcc-multilib \
             git \
-#            libboost-dev \
-#            libcdd-dev \
-#            libcurl4-openssl-dev \
-#            libflint-dev \
-#            libglpk-dev \
             libgmp-dev \
-#            libgmpxx4ldbl \
-#            libmpc-dev \
-#            libmpfi-dev \
-#            libmpfr-dev \
-#            libncurses5-dev \
-#            libntl-dev \
             libreadline6-dev \
             libtool \
-#            libxml2-dev \
-#            libzmq3-dev \
             m4 \
-#            mercurial \
-#            polymake \
-#            python3-pip \
             sudo \
             unzip \
-            wget 
-#            libfplll-dev\
-#            singular\
-#            libsingular4-dev\
-#            4ti2\
-#            pari-gp\
-#            macaulay2
-#    && ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
-
-## maybe we only need this if we actually care about jupyter stuff??
-#RUN pip3 install notebook jupyterlab_launcher jupyterlab traitlets ipython vdom
+            wget
 
 # add gap user
 RUN    adduser --quiet --shell /bin/bash --gecos "GAP user,101,," --disabled-password gap \

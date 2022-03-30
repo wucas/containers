@@ -10,7 +10,6 @@ ENV HOME /home/root
 # Prerequisites
 RUN    apt-get -qq install -y \
         gcc-multilib \
-        libboost-dev \
         libcdd-dev \
         libcurl4-openssl-dev \
         libflint-dev \
