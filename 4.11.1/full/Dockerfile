@@ -1,4 +1,4 @@
-FROM gap-base:testv0.5
+FROM gap-all-deps:testv0.2
 
 LABEL maintainer="The GAP Group <support@gap-system.org>"
 
@@ -7,9 +7,9 @@ ENV GAP_VERSION=4.11.1
 # download and build GAP
 RUN    mkdir /home/gap/inst/ \
     && cd /home/gap/inst/ \
-    && wget https://github.com/gap-system/gap/releases/download/v${GAP_VERSION}/gap-${GAP_VERSION}-core.zip \
-    && unzip gap-${GAP_VERSION}-core.zip \
-    && rm gap-${GAP_VERSION}-core.zip \
+    && wget https://github.com/gap-system/gap/releases/download/v${GAP_VERSION}/gap-${GAP_VERSION}-core.tar.gz \
+    && tar xzf gap-${GAP_VERSION}-core.tar.gz \
+    && rm gap-${GAP_VERSION}-core.tar.gz \
     && cd gap-${GAP_VERSION} \
     && ./autogen.sh \
     && ./configure \
