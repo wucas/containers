@@ -61,10 +61,10 @@ if [[ "${VERSION: -7}" = "-latest" ]] || [[ $VERSION = "master" ]] ; then
         exit
     fi
 
-    mkdir gap/inst
-    #mkdir /home/gap/inst/ 
-    #cd /home/gap/inst/ || exit 
-    cd gap/inst/ || exit 
+    #mkdir gap/inst
+    mkdir /home/gap/inst/ 
+    cd /home/gap/inst/ || exit 
+    #cd gap/inst/ || exit 
     git clone --depth=1 -b "${GAP_VERSION}" https://github.com/gap-system/gap gap-"${GAP_VERSION}" 
     cd gap-"${GAP_VERSION}" || exit 
 
@@ -80,10 +80,10 @@ else
         exit
     fi
 
-    mkdir gap/inst
-    #mkdir /home/gap/inst/ 
-    #cd /home/gap/inst/ || exit 
-    cd gap/inst/ || exit
+    #mkdir gap/inst
+    mkdir /home/gap/inst/ 
+    cd /home/gap/inst/ || exit 
+    #cd gap/inst/ || exit
     wget https://github.com/gap-system/gap/releases/download/"${GAP_VERSION}"/gap-"${GAP_VERSION/#v}"-core.zip 
     unzip gap-"${GAP_VERSION/#v}"-core.zip 
     rm gap-"${GAP_VERSION/#v}"-core.zip 
@@ -108,16 +108,16 @@ case $TYPE in
         cd pkg || exit 
         #wget -q https://github.com/gap-system/gap/releases/download/v"${GAP_VERSION}"/packages-required-v"${GAP_VERSION}".zip 
         if [[ "$GAP_VERSION" = "$LATEST_VERSION" ]] ; then
-        # HACK wont work in general!!!
             echo "latest_version"
-            #wget https://files.gap-system.org/gap4pkgs/packages-required-"stable-${GAP_VERSION/%.1}".tar.gz
-            wget https://files.gap-system.org/gap4pkgs/packages-required-"stable-4.11".tar.gz
-            tar xzf packages-required-"stable-4.11".tar.gz 
-            rm packages-required-"stable-4.11".tar.gz
+            URL_STRING="stable-${GAP_VERSION/#v}"
+            URL_STRING="${URL_STRING%.*}"
+            wget https://files.gap-system.org/gap4pkgs/packages-required-"${URL_STRING}".tar.gz
+            tar xzf packages-required-"${URL_STRING}".tar.gz 
+            rm packages-required-"${URL_STRING}".tar.gz
         else 
-            wget -q https://files.gap-system.org/gap4pkgs/packages-required-"${GAP_VERSION}".zip
-            unzip packages-required-"${GAP_VERSION}".zip 
-            rm packages-required-"${GAP_VERSION}".zip
+            wget https://files.gap-system.org/gap4pkgs/packages-required-"${GAP_VERSION}".tar.gz
+            tar xzf packages-required-"${GAP_VERSION}".tar.gz 
+            rm packages-required-"${GAP_VERSION}".tar.gz
         fi
         ;;
     full)
@@ -126,14 +126,16 @@ case $TYPE in
         cd pkg || exit 
         #wget -q https://github.com/gap-system/gap/releases/download/v"${GAP_VERSION}"/packages-required-v"${GAP_VERSION}".zip 
         if [[ "$GAP_VERSION" = "$LATEST_VERSION" ]] ; then
-        # HACK wont work in general!!!
-            wget -q https://files.gap-system.org/gap4pkgs/packages-"stable-${GAP_VERSION/%.1}".zip
-            unzip packages-"${GAP_VERSION}".zip 
-            rm packages-"${GAP_VERSION}".zip
+            echo "latest_version"
+            URL_STRING="stable-${GAP_VERSION/#v}"
+            URL_STRING="${URL_STRING%.*}"
+            wget https://files.gap-system.org/gap4pkgs/packages-required-"${URL_STRING}".tar.gz
+            tar xzf packages-required-"${URL_STRING}".tar.gz 
+            rm packages-required-"${URL_STRING}".tar.gz
         else 
-            wget -q https://files.gap-system.org/gap4pkgs/packages-"${GAP_VERSION}".zip
-            unzip packages-"${GAP_VERSION}".zip 
-            rm packages-"${GAP_VERSION}".zip
+            wget https://files.gap-system.org/gap4pkgs/packages-"${GAP_VERSION}".tar.gz
+            tar xzf packages-"${GAP_VERSION}".tar.gz 
+            rm packages-"${GAP_VERSION}".tar.gz
         fi
         ../bin/BuildPackages.sh --parallel
         ;;
